@@ -15,6 +15,7 @@ import java.util.List;
  * @author Qalbun Saliim Bakhri
  */
 public class Employee {
+    //primitive obsession
     private enum Gender {
         lakiLaki,
         perempuan
@@ -26,7 +27,7 @@ public class Employee {
     private String idNumber;
     private String address;
 
-    private LocalDate dateJoined;
+    private LocalDate dateJoined; 
     private int monthWorkingInYear;
 
     private boolean isForeigner;
