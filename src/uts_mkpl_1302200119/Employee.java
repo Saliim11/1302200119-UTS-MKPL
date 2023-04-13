@@ -6,6 +6,7 @@
 package uts_mkpl_1302200119;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,16 +14,22 @@ import java.util.List;
  *
  * @author Qalbun Saliim Bakhri
  */
-public class Employee extends Identity{
-    
 
-    private int yearJoined;
-    private int monthJoined;
-    private int dayJoined;
+public class Employee extends Identity{
+
+    //primitive obsession
+    private enum Gender {
+        lakiLaki,
+        perempuan
+    }
+    
+   
+
+    private LocalDate dateJoined; 
     private int monthWorkingInYear;
 
     private boolean isForeigner;
-    private boolean gender; //true = Laki-laki, false = Perempuan
+    private Gender gender; //true = Laki-laki, false = Perempuan
 
     private int monthlySalary;
     private int otherMonthlyIncome;
@@ -34,13 +41,13 @@ public class Employee extends Identity{
     private List<String> childNames;
     private List<String> childIdNumbers;
 
-    public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, boolean gender) {
+
+    public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, LocalDate date, Gender gender, boolean isForeigner) {
             super(employeeId, firstName, lastName, idNumber, address);
-            this.yearJoined = yearJoined;
-            this.monthJoined = monthJoined;
-            this.dayJoined = dayJoined;
-            this.isForeigner = isForeigner;
+            this.dateJoined = date;
+
             this.gender = gender;
+            this.isForeigner = isForeigner;
 
             childNames = new LinkedList<String>();
             childIdNumbers = new LinkedList<String>();
@@ -93,13 +100,31 @@ public class Employee extends Identity{
             //Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
             LocalDate date = LocalDate.now();
 
-            if (date.getYear() == yearJoined) {
-                    monthWorkingInYear = date.getMonthValue() - monthJoined;
+            if (date.getYear() == this.dateJoined.getYear()) {
+                    monthWorkingInYear = date.getMonthValue() - this.dateJoined.getMonthValue();
             }else {
                     monthWorkingInYear = 12;
             }
 
             return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
     }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public LocalDate getDateJoined() {
+        return dateJoined;
+    }
+
+    public void setDateJoined(LocalDate dateJoined) {
+        this.dateJoined = dateJoined;
+    }
+    
+    
     
 }
