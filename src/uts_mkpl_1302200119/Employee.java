@@ -22,8 +22,6 @@ public class Employee extends Identity{
         lakiLaki,
         perempuan
     }
-    
-   
 
     private LocalDate dateJoined; 
     private int monthWorkingInYear;
@@ -35,8 +33,7 @@ public class Employee extends Identity{
     private int otherMonthlyIncome;
     private int annualDeductible;
 
-    private String spouseName;
-    private String spouseIdNumber;
+    private Spouse spouse;
 
     private List<String> childNames;
     private List<String> childIdNumbers;
@@ -85,9 +82,8 @@ public class Employee extends Identity{
             this.otherMonthlyIncome = income;
     }
 
-    public void setSpouse(String spouseName, String spouseIdNumber) {
-            this.spouseName = spouseName;
-            this.spouseIdNumber = super.getIdNumber();
+    public void setSpouse(String spouseName) {
+            this.spouse = new Spouse(spouseName, super.getIdNumber());
     }
 
     public void addChild(String childName, String childIdNumber) {
@@ -106,7 +102,7 @@ public class Employee extends Identity{
                     monthWorkingInYear = 12;
             }
 
-            return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
+            return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouse.getSpouseIdNumber().equals(""), childIdNumbers.size());
     }
 
     public Gender getGender() {
