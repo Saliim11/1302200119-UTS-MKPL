@@ -14,6 +14,11 @@ import java.util.List;
  * @author Qalbun Saliim Bakhri
  */
 public class Employee {
+    private enum Gender {
+        lakiLaki,
+        perempuan
+    }
+    
     private String employeeId;
     private String firstName;
     private String lastName;
@@ -26,7 +31,7 @@ public class Employee {
     private int monthWorkingInYear;
 
     private boolean isForeigner;
-    private boolean gender; //true = Laki-laki, false = Perempuan
+    private Gender gender; //true = Laki-laki, false = Perempuan
 
     private int monthlySalary;
     private int otherMonthlyIncome;
@@ -38,7 +43,7 @@ public class Employee {
     private List<String> childNames;
     private List<String> childIdNumbers;
 
-    public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, boolean gender) {
+    public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner) {
             this.employeeId = employeeId;
             this.firstName = firstName;
             this.lastName = lastName;
@@ -48,7 +53,6 @@ public class Employee {
             this.monthJoined = monthJoined;
             this.dayJoined = dayJoined;
             this.isForeigner = isForeigner;
-            this.gender = gender;
 
             childNames = new LinkedList<String>();
             childIdNumbers = new LinkedList<String>();
@@ -108,6 +112,14 @@ public class Employee {
             }
 
             return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
     
 }
