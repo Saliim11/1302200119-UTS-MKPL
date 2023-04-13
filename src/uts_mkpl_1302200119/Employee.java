@@ -42,13 +42,14 @@ public class Employee {
     private List<String> childNames;
     private List<String> childIdNumbers;
 
-    public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, boolean isForeigner) {
+    public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, LocalDate date, Gender gender, boolean isForeigner) {
             this.employeeId = employeeId;
             this.firstName = firstName;
             this.lastName = lastName;
             this.idNumber = idNumber;
             this.address = address;
-            
+            this.dateJoined = date;
+            this.gender = gender;
             this.isForeigner = isForeigner;
 
             childNames = new LinkedList<String>();
