@@ -22,8 +22,6 @@ public class Employee extends Identity{
         lakiLaki,
         perempuan
     }
-    
-   
 
     private LocalDate dateJoined; 
     private int monthWorkingInYear;
@@ -35,12 +33,9 @@ public class Employee extends Identity{
     private int otherMonthlyIncome;
     private int annualDeductible;
 
-    private String spouseName;
-    private String spouseIdNumber;
+    private Spouse spouse;
 
-    private List<String> childNames;
-    private List<String> childIdNumbers;
-
+    private List<Childs> childs;
 
     public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, LocalDate date, Gender gender, boolean isForeigner) {
             super(employeeId, firstName, lastName, idNumber, address);
@@ -49,8 +44,7 @@ public class Employee extends Identity{
             this.gender = gender;
             this.isForeigner = isForeigner;
 
-            childNames = new LinkedList<String>();
-            childIdNumbers = new LinkedList<String>();
+            this.childs = new LinkedList<Childs>();
     }
 
     /**
@@ -85,14 +79,12 @@ public class Employee extends Identity{
             this.otherMonthlyIncome = income;
     }
 
-    public void setSpouse(String spouseName, String spouseIdNumber) {
-            this.spouseName = spouseName;
-            this.spouseIdNumber = super.getIdNumber();
+    public void setSpouse(String spouseName) {
+            this.spouse = new Spouse(spouseName, super.getIdNumber());
     }
 
     public void addChild(String childName, String childIdNumber) {
-            childNames.add(childName);
-            childIdNumbers.add(childIdNumber);
+            childs.add(new Childs(childName, childIdNumber));
     }
 
     public int getAnnualIncomeTax() {
@@ -106,7 +98,7 @@ public class Employee extends Identity{
                     monthWorkingInYear = 12;
             }
 
-            return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
+            return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouse.getSpouseIdNumber().equals(""), childs.size());
     }
 
     public Gender getGender() {
