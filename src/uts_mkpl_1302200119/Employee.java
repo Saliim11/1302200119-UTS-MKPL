@@ -13,12 +13,8 @@ import java.util.List;
  *
  * @author Qalbun Saliim Bakhri
  */
-public class Employee {
-    private String employeeId;
-    private String firstName;
-    private String lastName;
-    private String idNumber;
-    private String address;
+public class Employee extends Identity{
+    
 
     private int yearJoined;
     private int monthJoined;
@@ -39,11 +35,7 @@ public class Employee {
     private List<String> childIdNumbers;
 
     public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, boolean gender) {
-            this.employeeId = employeeId;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.idNumber = idNumber;
-            this.address = address;
+            super(employeeId, firstName, lastName, idNumber, address);
             this.yearJoined = yearJoined;
             this.monthJoined = monthJoined;
             this.dayJoined = dayJoined;
@@ -88,7 +80,7 @@ public class Employee {
 
     public void setSpouse(String spouseName, String spouseIdNumber) {
             this.spouseName = spouseName;
-            this.spouseIdNumber = idNumber;
+            this.spouseIdNumber = super.getIdNumber();
     }
 
     public void addChild(String childName, String childIdNumber) {
