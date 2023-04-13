@@ -14,18 +14,16 @@ import java.util.List;
  *
  * @author Qalbun Saliim Bakhri
  */
-public class Employee {
+
+public class Employee extends Identity{
+
     //primitive obsession
     private enum Gender {
         lakiLaki,
         perempuan
     }
     
-    private String employeeId;
-    private String firstName;
-    private String lastName;
-    private String idNumber;
-    private String address;
+   
 
     private LocalDate dateJoined; 
     private int monthWorkingInYear;
@@ -43,13 +41,11 @@ public class Employee {
     private List<String> childNames;
     private List<String> childIdNumbers;
 
+
     public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, LocalDate date, Gender gender, boolean isForeigner) {
-            this.employeeId = employeeId;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.idNumber = idNumber;
-            this.address = address;
+            super(employeeId, firstName, lastName, idNumber, address);
             this.dateJoined = date;
+
             this.gender = gender;
             this.isForeigner = isForeigner;
 
@@ -91,7 +87,7 @@ public class Employee {
 
     public void setSpouse(String spouseName, String spouseIdNumber) {
             this.spouseName = spouseName;
-            this.spouseIdNumber = idNumber;
+            this.spouseIdNumber = super.getIdNumber();
     }
 
     public void addChild(String childName, String childIdNumber) {
