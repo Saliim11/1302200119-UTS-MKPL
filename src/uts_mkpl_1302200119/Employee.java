@@ -6,6 +6,7 @@
 package uts_mkpl_1302200119;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,9 +26,7 @@ public class Employee {
     private String idNumber;
     private String address;
 
-    private int yearJoined;
-    private int monthJoined;
-    private int dayJoined;
+    private LocalDate dateJoined;
     private int monthWorkingInYear;
 
     private boolean isForeigner;
@@ -43,15 +42,13 @@ public class Employee {
     private List<String> childNames;
     private List<String> childIdNumbers;
 
-    public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner) {
+    public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, boolean isForeigner) {
             this.employeeId = employeeId;
             this.firstName = firstName;
             this.lastName = lastName;
             this.idNumber = idNumber;
             this.address = address;
-            this.yearJoined = yearJoined;
-            this.monthJoined = monthJoined;
-            this.dayJoined = dayJoined;
+            
             this.isForeigner = isForeigner;
 
             childNames = new LinkedList<String>();
@@ -105,8 +102,8 @@ public class Employee {
             //Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
             LocalDate date = LocalDate.now();
 
-            if (date.getYear() == yearJoined) {
-                    monthWorkingInYear = date.getMonthValue() - monthJoined;
+            if (date.getYear() == this.dateJoined.getYear()) {
+                    monthWorkingInYear = date.getMonthValue() - this.dateJoined.getMonthValue();
             }else {
                     monthWorkingInYear = 12;
             }
@@ -121,5 +118,15 @@ public class Employee {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+
+    public LocalDate getDateJoined() {
+        return dateJoined;
+    }
+
+    public void setDateJoined(LocalDate dateJoined) {
+        this.dateJoined = dateJoined;
+    }
+    
+    
     
 }
